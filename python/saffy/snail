@@ -1,0 +1,33 @@
+T = int(input())
+for test_case in range(1, T + 1):
+    N = int(input())
+    snail = [[0] * N for _ in range(N)]
+
+    num = 1
+    top, bottom = 0, N - 1
+    left, right = 0, N - 1
+
+    while num <= N * N:
+        for i in range(left, right + 1):
+            snail[top][i] = num
+            num += 1
+        top += 1
+
+        for i in range(top, bottom + 1):
+            snail[i][right] = num
+            num += 1
+        right -= 1
+
+        for i in range(right, left - 1, -1):
+            snail[bottom][i] = num
+            num += 1
+        bottom -= 1
+
+        for i in range(bottom, top - 1, -1):
+            snail[i][left] = num
+            num += 1
+        left += 1
+
+    print("#T", T)
+    for row in snail:
+        print(' '.join(map(str, row)))
